@@ -1,10 +1,9 @@
-from xrectsel import XRectSel, coordinates
+from xrectsel import XRectSel
 
 
 def cli():
     xrect = XRectSel()
-    start, end = xrect.select()
-    geormetry = coordinates(start, end)
+    geormetry = xrect.select()
 
     if geormetry["width"] <= 1 or geormetry["height"] <= 1:
         pass

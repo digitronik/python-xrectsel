@@ -1,10 +1,13 @@
-#!/usr/bin/env python
-
 import sys
 from Xlib import X, display, Xcursorfont
 
 
 def coordinates(start_point, end_point):
+    """
+    :param start_point: Start co-ordinates of rectangle
+    :param end_point: End co-ordinates of rectangle
+    :return: dict of start co-ordinates, end co-ordinates, width, height of rectangle.
+    """
     X = dict(x=0, y=0)
     Y = dict(x=0, y=0)
 
@@ -18,11 +21,21 @@ def coordinates(start_point, end_point):
 
 
 class XRectSel(object):
-    def __init__(self, _display=None, screen=None):
+    """
+    Base class for python-xrectsel
+
+    TODO: Enhancement like colors, pixels customization.
+    """
+
+    def __init__(self, _display=None):
+        """
+        :param _display: custom display else it will take default
+        """
         self.display = _display if _display else display.Display()
-        self.screen = screen if screen else self.display.screen()
+        self.screen = self.display.screen()
         self.window = self.screen.root
 
+        # Grab mouse pointer
         self.window.grab_pointer(
             1,
             X.PointerMotionMask | X.ButtonReleaseMask | X.ButtonPressMask,
@@ -33,6 +46,7 @@ class XRectSel(object):
             X.CurrentTime,
         )
 
+        # Grab keyboard
         self.window.grab_keyboard(1, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
         self.gc = self.window.create_gc(
@@ -61,13 +75,17 @@ class XRectSel(object):
             font, Xcursorfont.crosshair, Xcursorfont.crosshair + 1, (65535, 65535, 65535), (0, 0, 0)
         )
 
-    def draw_rectangle(self, start_point, end_point):
-        coords = coordinates(start_point, end_point)
+    def draw_rectangle(self, coords):
         self.window.rectangle(
             self.gc, coords["start"]["x"], coords["start"]["y"], coords["width"], coords["height"]
         )
 
     def select(self):
+        """
+        Draw rectangle with mouse events
+
+        :return: dict of start co-ordinates, end co-ordinates, width, height of rectangle.
+        """
         start_point = {}
         end_point = {}
         tmp_point = {}
@@ -98,18 +116,25 @@ class XRectSel(object):
                     continue
 
                 if tmp_point:
-                    self.draw_rectangle(start_point, tmp_point)
+                    coords = coordinates(start_point, tmp_point)
+                    self.draw_rectangle(coords)
                     tmp_point = None
 
                 tmp_point = dict(x=event.root_x, y=event.root_y)
-                self.draw_rectangle(start_point, tmp_point)
+                coords = coordinates(start_point, tmp_point)
+                self.draw_rectangle(coords)
 
             # Mouse button release
             elif event.type == X.ButtonRelease:
                 if tmp_point:
-                    self.draw_rectangle(start_point, tmp_point)
-
+                    coords = coordinates(start_point, tmp_point)
+                    self.draw_rectangle(coords)
                 end_point = dict(x=event.root_x, y=event.root_y)
 
         self.display.flush()
-        return start_point, end_point
+        self.display.close()
+        return coordinates(start_point, end_point)
+
+
+if __name__ == "__main__":
+    print(XRectSel().select())
