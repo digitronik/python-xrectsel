@@ -31,7 +31,7 @@ setup(
     name="python-xrectsel",
     packages=find_packages(include=["xrectsel"]),
     url="https://github.com/digitronik/python-xrectsel",
-    version="1.0",
+    version="1.1",
     license="GPLv3",
     zip_safe=False,
 )
