@@ -21,7 +21,8 @@ setup(
     ],
     description="Geometry of a rectangular screen region",
     setup_requires=["setuptools_scm"],
-    install_requires=["python-xlib"],
+    use_scm_version=True,
+    install_requires=["python-xlib", "click"],
     long_description=readme,
     long_description_content_type="text/markdown",
     entry_points={"console_scripts": ["xrectsel= xrectsel.console:cli"]},
@@ -31,7 +32,6 @@ setup(
     name="python-xrectsel",
     packages=find_packages(include=["xrectsel"]),
     url="https://github.com/digitronik/python-xrectsel",
-    version="1.1",
     license="GPLv3",
     zip_safe=False,
 )
