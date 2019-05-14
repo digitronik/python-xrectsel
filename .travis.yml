@@ -1,0 +1,16 @@
+language: python
+install:
+- pip install tox
+script:
+- tox
+after_failure:
+- git diff
+deploy:
+  provider: pypi
+  user: digitronik
+  password:
+    secure: Jv9YSGM1fjBoIXbV2uEqZc8SDNr6qK+SVTMsc/8KfzQWWwZnuNZK78BQBw7Y1QSKmMpp6e2zb7kkXRJw7q1BKRZ+XIStVbJ6lUFfqeEKDfYGftEgCiu0qejxb1/zEyPI8fTPSmcWTOcLTOn/Oum9fw4gwuw/xQ1vaVrvXHKIgwwS4Scm6ZiODLlX5uPSX5ufzEkIWzPkCob9FfL93nmEwjbN7rKPmM6uriDnd1b9EoIb8LgGklVCBJDEJfFK+NNo3Ft9AZ0eGDK5kG6Q0tiRxyCXyR+pwvwxQu9dnmhTRCZfm9hg13okwsRcdEEKSiGP5iSDmzDl7RBtQzhVVaRNMbMWMRHY6/p0L7FvDDHgmN1VjsjMZk91L5IGJvk4IUYT6KSYIZ3ombgkoWCFvMIlIDMyJ+sbkWsqKLvoFSHx+tCeqNVhiSVgStRQsqbGhhYNibebeNtWN5MGzA8PtHswtNfstocu2N3yqEV/ZkpDhr5uZtBOoH7snWVxD75mw/BNpPvA8cSE5Q7SCG59fUBXLQny5ngvKFqbx+Nn5ydjZrnw1th5AH7TKvZFry3N8UFvXsHDZlfRPAKqdGtMgR9vwc0DPhwrHHq8jLOomDLrxJK88QP8CqnKqsciPIBxpt9AfvfgewdDrkSlQ07PF0PlxSmBqpUfyz+ZiZut9tPmq5U=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: digitronik/python-xrectsel
