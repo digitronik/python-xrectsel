@@ -12,25 +12,35 @@ src="https://img.shields.io/pypi/l/miqsel.svg?version=latest"></a>
 src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
-
+This project idea based on `xrectsel` https://github.com/lolilolicon/xrectsel.
 ## Installation:
 ```bash
 pip3 install python-xrectsel --user
 ```
 
 ## Usage:
-- Shell
+```shell
+Usage: xrectsel [OPTIONS]
+
+Options:
+  -f, --format TEXT  Format string...
+                     %x - start x-coordinate
+                     %y - start y-coordinate
+                     %X - start
+                     %Y - end
+                     %w - width
+                     %h - height
+  --help             Show this message and exit.
+
+```
+- Default format is `%wx%h+%x+%y`
 ```bash
 $ xrectsel
 $ # select rectangle on sreen
-127 172 862 465 #(x-coordinate, y-coordinate, width, height)
+901x634+44+7 #(x-coordinate, y-coordinate, width, height)
 ```
-- Python
-```python
-❯❯❯ cat test.py 
-from xrectsel import XRectSel
-print(XRectSel().select())
-
-❯❯❯ python3 test.py 
-{'start': {'x': 102, 'y': 218}, 'end': {'x': 1170, 'y': 476}, 'width': 1068, 'height': 258}
+- Formatting string
+```bash
+$ xrectsel -f "--x=%x --y=%y --width=%w --height=%h"
+--x=264 --y=387 --width=1204 --height=519
 ```
