@@ -4,6 +4,8 @@
 <p align="center">
 <a href="https://pypi.org/project/python-xrectsel"><img alt="Python Versions"
 src="https://img.shields.io/pypi/pyversions/python-xrectsel.svg?style=flat"></a>
+<a href="https://travis-ci.org/digitronik/python-xrectsel"><img alt="Build Status"
+src="https://travis-ci.org/digitronik/python-xrectsel.svg?branch=master"></a>
 <a href="https://pypi.org/project/python-xrectsel/#history"><img alt="PyPI version"
 src="https://badge.fury.io/py/python-xrectsel.svg"></a>
 <a href="https://github.com/digitronik/python-xrectsel/blob/master/LICENSE"><img alt="License: GPLV3"
