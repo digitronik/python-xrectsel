@@ -133,7 +133,9 @@ class XRectSel(object):
 
         self.display.flush()
         self.display.close()
-        return coordinates(start_point, end_point)
+
+        if start_point and end_point:
+            return coordinates(start_point, end_point)
 
 
 if __name__ == "__main__":

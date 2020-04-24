@@ -18,9 +18,7 @@ def cli(format):
     xrect = XRectSel()
     geormetry = xrect.select()
 
-    if geormetry["width"] <= 1 or geormetry["height"] <= 1:
-        pass
-    else:
+    if geormetry and geormetry["width"] >= 1 and geormetry["height"] >= 1:
         click.echo(
             format.replace("%x", str(geormetry["start"]["x"]))
             .replace("%y", str(geormetry["start"]["y"]))
@@ -29,3 +27,5 @@ def cli(format):
             .replace("%w", str(geormetry["width"]))
             .replace("%h", str(geormetry["height"]))
         )
+    else:
+        click.echo("Please select area")
