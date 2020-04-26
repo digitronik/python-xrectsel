@@ -15,13 +15,7 @@ def tests(session):
     """Run unit test over different python env with code coverage"""
     session.install("pytest", "pytest-cov", "-e", ".")
     session.run(
-        "py.test",
-        "--cov=xrectsel",
-        "--cov-report=xml",
-        "--cov-branch",
-        "--color=yes",
-        "-s",
-        "-v",
+        "py.test", "--cov=xrectsel", "--cov-report=xml", "--cov-branch", "--color=yes", "-s", "-v",
     )
 
 
@@ -34,15 +28,15 @@ def coverage(session):
 
 @nox.session()
 def package(session):
-    """Build and verify package"""
     session.install("twine", "setuptools", "wheel")
     session.run("python", "setup.py", "sdist", "bdist_wheel")
     session.run("ls", "-l", "dist")
     session.run("python", "-m", "twine", "check", "dist/*")
+    session.run("rm", "-rf", "build", "dist", external=True)
 
 
 @nox.session()
 def dev_setup(session):
-    """Ensure development environment works everywhere. mainly with ci on different platform"""
+    """Ensure development environment works"""
     session.run("python", "-m", "pip", "install", "-e", ".[dev]")
-    session.run("python", "-c", "from xrectsel import XRectSel; XRectSele()")
+    session.run("python", "-c", "from xrectsel import XRectSel; XRectSel()")
