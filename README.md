@@ -1,6 +1,6 @@
-<h1 align="center"> python-xrectsel</h2>
-
+<h1 align="center"> python-xrectsel</h1>
 <h3 align="center">Geometry of a rectangular screen region</h3>
+
 <p align="center">
 <a href="https://pypi.org/project/python-xrectsel"><img alt="Python Versions"
 src="https://img.shields.io/pypi/pyversions/python-xrectsel.svg?style=flat"></a>
@@ -14,34 +14,53 @@ src="https://img.shields.io/pypi/l/miqsel.svg?version=latest"></a>
 src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
-This project idea based on `xrectsel` https://github.com/lolilolicon/xrectsel.
-## Installation:
+The project idea based on [xrectsel](https://github.com/lolilolicon/xrectsel). Its Python variant with some enhancements.
+
+### Installation:
 ```bash
-pip3 install python-xrectsel --user
+pip install python-xrectsel
 ```
 
-## Usage:
+### Usage:
 ```shell
+❯ xrectsel --help
 Usage: xrectsel [OPTIONS]
 
 Options:
-  -f, --format TEXT  Format string...
-                     %x - start x-coordinate
-                     %y - start y-coordinate
-                     %X - start
-                     %Y - end
-                     %w - width
-                     %h - height
-  --help             Show this message and exit.
+  -f, --format TEXT               Format output string with fallowing options:
+
+                                  %x - start x-coordinate
+
+                                  %y - start y-coordinate
+
+                                  %X - start
+
+                                  %Y - end
+
+                                  %w - width
+
+                                  %h - height
+
+                                  Note: default output is in "%wx%h+%x+%y"
+                                  format.
+
+  -ci, --cursor-icon [crosshair|cross|pencil|dotbox]
+                                  Select cursor icon
+  -cf, --cursor-foreground <INTEGER INTEGER INTEGER>...
+                                  Select cursor foreground color
+  -cb, --cursor-background <INTEGER INTEGER INTEGER>...
+                                  Select cursor background color
+  -h, --help                      Show this message and exit.
 
 ```
-- Default format is `%wx%h+%x+%y`
+
+- We can collect selected region geometry just by command `xrectsel`. Default format is `%wx%h+%x+%y`
 ```bash
 $ xrectsel
 $ # select rectangle on sreen
 901x634+44+7 #(x-coordinate, y-coordinate, width, height)
 ```
-- Formatting string
+- We can format output geometry string
 ```bash
 $ xrectsel -f "--x=%x --y=%y --width=%w --height=%h"
 --x=264 --y=387 --width=1204 --height=519
