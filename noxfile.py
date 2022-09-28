@@ -15,7 +15,13 @@ def tests(session):
     """Run unit test over different python env with code coverage"""
     session.install("pytest", "pytest-cov", "-e", ".")
     session.run(
-        "py.test", "--cov=xrectsel", "--cov-report=xml", "--cov-branch", "--color=yes", "-s", "-v",
+        "py.test",
+        "--cov=xrectsel",
+        "--cov-report=xml",
+        "--cov-branch",
+        "--color=yes",
+        "-s",
+        "-v",
     )
 
 
