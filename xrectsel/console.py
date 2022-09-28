@@ -36,10 +36,14 @@ FORMAT_HELP = """Format output string with fallowing options:
     "-cf",
     "--cursor-foreground",
     default=(65535, 65535, 65535),
+    type=click.Tuple([int, int, int]),
     help="Select cursor foreground color",
 )
 @click.option(
-    "-cb", "--cursor-background", default=(0, 0, 0), help="Select cursor background color"
+    "-cb", "--cursor-background",
+    default=(0, 0, 0),
+    type=click.Tuple([int, int, int]),
+    help="Select cursor background color",
 )
 def cli(format, cursor_icon, cursor_foreground, cursor_background):
     xrect = XRectSel(
