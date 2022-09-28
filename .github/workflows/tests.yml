@@ -1,6 +1,13 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: ["opened", "synchronize", "reopened"]
+  create:
+
 
 jobs:
   pre-commit:
@@ -9,12 +16,12 @@ jobs:
 
     steps:
       - name: Checkout to master
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.x'
           architecture: 'x64'
 
       - name: Pre-Commit Checks
@@ -33,13 +40,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.5', '3.6', '3.7', '3.8' ]
+        python-version: [ "3.8", "3.9", "3.10" ]
     steps:
       - name: Checkout to master
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup Python-${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -70,12 +77,12 @@ jobs:
 
     steps:
       - name: Checkout to master
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.x'
           architecture: 'x64'
 
       - name: Setup test environment

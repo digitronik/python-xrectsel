@@ -40,7 +40,8 @@ FORMAT_HELP = """Format output string with fallowing options:
     help="Select cursor foreground color",
 )
 @click.option(
-    "-cb", "--cursor-background",
+    "-cb",
+    "--cursor-background",
     default=(0, 0, 0),
     type=click.Tuple([int, int, int]),
     help="Select cursor background color",
