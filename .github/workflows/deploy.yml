@@ -14,12 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to master
-        uses: actions/checkout@master
-
+        uses: actions/checkout@v3
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.x'
           architecture: 'x64'
 
       - name: Build Package and Check
