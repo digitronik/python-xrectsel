@@ -10,7 +10,7 @@ def pre_commit(session):
     session.run("pre-commit", "run", "-a")
 
 
-@nox.session(python=["3.5", "3.6", "3.7", "3.8"])
+@nox.session
 def tests(session):
     """Run unit test over different python env with code coverage"""
     session.install("pytest", "pytest-cov", "-e", ".")
@@ -25,14 +25,14 @@ def tests(session):
     )
 
 
-@nox.session()
+@nox.session
 def coverage(session):
     """This is only to run test on ci"""
     session.install("coverage")
     session.run("coverage", "report")
 
 
-@nox.session()
+@nox.session
 def package(session):
     session.install("twine", "setuptools", "wheel")
     session.run("python", "setup.py", "sdist", "bdist_wheel")
@@ -41,7 +41,7 @@ def package(session):
     session.run("rm", "-rf", "build", "dist", external=True)
 
 
-@nox.session()
+@nox.session
 def dev_setup(session):
     """Ensure development environment works"""
     session.run("python", "-m", "pip", "install", "-e", ".[dev]")
